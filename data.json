@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1234567890",
+    "title": "Delphi 7",
+    "author": "E. Troelsen",
+    "year": 2000,
+    "status": true
+  },
+  {
+    "id": "2345678901",
+    "title": "C/C++",
+    "author": "B. Straustrup",
+    "year": 1999,
+    "status": false
+  },
+  {
+    "id": "3456789012",
+    "title": "Harry Potter",
+    "author": "J. Rouling",
+    "year": 1998,
+    "status": true
+  }
+]
