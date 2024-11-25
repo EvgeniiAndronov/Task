@@ -1,8 +1,9 @@
-import json
+from add_test_data import save_test_data
 from methodsBook import *
-from add_test_data import *
 from book import *
 
+
+# Взаимодействуя с пользователем, добавляем книгу
 def user_add_book() -> None:
     try:
         title = str(input("Введите название книги: "))
@@ -15,7 +16,9 @@ def user_add_book() -> None:
             "year": year,
             "status": True
         }
+
         add_book(book)
+
         print("Книга успешно добавлена!")
     except ValueError:
         print("Ввели некорректные данные, попробуйте еще раз")
@@ -24,6 +27,7 @@ def user_add_book() -> None:
     except Exception as e:
         print("Непредвиденная ошибка!")
 
+# Взаимодействуя с пользователем, удаляем книгу
 def user_del_book() -> None:
     try:
         id = str(input("Введите id книги на удаление: "))
@@ -35,7 +39,7 @@ def user_del_book() -> None:
     except Exception as e:
         print("Непредвиденная ошибка!")
 
-
+# Вспомогательный метод, определение поискового преоритета
 def new_type(parametr) -> str:
     if parametr == "1":
         return "title"
@@ -44,14 +48,14 @@ def new_type(parametr) -> str:
     if parametr == "3":
         return "year"
 
-
+# Взаимодействуя с пользователем, ищем книгу или книги
 def user_find_book() -> None:
     try:
         print("1. Название книги\n2. Автор книги\n3. Год выпуска")
         typ = str(input("Введите параметр поиска книги: "))
-        print(typ, "--------")
+
         type_to_check = new_type(typ)
-        print(type_to_check, "--------")
+
         parametr = str(input("Введите параметр поиска: "))
 
         books: [dict] = find_books(parametr, type_to_check)
@@ -74,7 +78,7 @@ def user_find_book() -> None:
     except Exception as e:
         print("Непредвиденная ошибка!")
 
-
+# Взаимодействуя с пользователем, отображаем все книги
 def user_watch_all_book() -> None:
     try:
         data = all_books()
@@ -98,6 +102,7 @@ def user_watch_all_book() -> None:
     except Exception as e:
         print("Непредвиденная ошибка!")
 
+# Вспомогательный метод определения смены статуса
 def descriptor_user_data_status_book(status) -> bool:
     if status == "1":
         return False
@@ -105,6 +110,7 @@ def descriptor_user_data_status_book(status) -> bool:
     if status == "2":
         return True
 
+# Взаимодействуя с пользователем, изменяем статус книги
 def user_change_status_book() -> None:
     try:
         id = str(input("Введите id книги, у которой хотите изменить статус: "))
@@ -138,23 +144,47 @@ def user_change_status_book() -> None:
     except Exception as e:
         print("Непредвиденная ошибка!")
 
-# # add test data
-# save_test_data()
-#
-# print("all books------------------")
-# user_watch_all_book()
-#
-# # save_test_data()
-# print("del book--------------------")
-# user_del_book()
-#
-# print("find book -------------------")
-# user_find_book()
-#
-# print("change status book-----------")
-# user_change_status_book()
-
-# print("add book --------------------")
-# user_add_book()
 
 
+
+
+list_command = """
+    1. Добавление книги.
+    2. Удаление книги.
+    3. Поиск книги.
+    4. Отображение всех книг.
+    5. Изменение статуса книги(есть в наличии или нет).
+    
+    0. Завершение работы программы.
+"""
+
+helloMessage = f"""
+    Привет! Это система управления библиотекой.
+    Вот что она умеет делать:
+"""
+
+choose_option = "Выберете действие(введите номер действия): "
+
+def main():
+    flag = True
+    print(helloMessage)
+    while flag:
+        print(list_command)
+        option = str(input(choose_option))
+        if option == "1":
+            user_add_book()
+        if option == "2":
+            user_del_book()
+        if option == "3":
+            user_find_book()
+        if option == "4":
+            user_watch_all_book()
+        if option == "5":
+            user_change_status_book()
+        if option == "0":
+            flag = False
+
+
+if __name__ == "__main__":
+    # main()
+    save_test_data()

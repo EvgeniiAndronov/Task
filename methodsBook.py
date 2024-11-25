@@ -7,7 +7,6 @@ def add_book(book) -> None:
     try:
         with open('data.json', 'r+') as file:
             data = json.load(file)
-            print(data)
             book["id"]: str = generate_random_id()
 
             data.append(book)
@@ -20,7 +19,7 @@ def add_book(book) -> None:
     except FileExistsError:
         print("Файл уже обрабатывается")
     except Exception as e:
-        # print(e)
+        print(e)
         print("Непредвиденная ошибка! Попробуйте снова.")
 
 def generate_random_id() -> str:
