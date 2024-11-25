@@ -19,16 +19,22 @@ def user_add_book() -> None:
         print("Книга успешно добавлена!")
     except ValueError:
         print("Ввели некорректные данные, попробуйте еще раз")
+    except TypeError:
+        print("Ошибка введенных данных.")
+    except Exception as e:
+        print("Непредвиденная ошибка!")
 
 def user_del_book() -> None:
     try:
         id = str(input("Введите id книги на удаление: "))
         delete_book(id)
-
     except ValueError:
-        print("Ввели некорректные данные, попробуйте еще раз.")
-    except Exception:
-        print("Что-то пошло не так! Попробуйте еще раз.")
+        print("Ввели некорректные данные, попробуйте еще раз")
+    except TypeError:
+        print("Ошибка введенных данных.")
+    except Exception as e:
+        print("Непредвиденная ошибка!")
+
 
 def new_type(parametr) -> str:
     if parametr == "1":
@@ -62,7 +68,11 @@ def user_find_book() -> None:
             b.show_book()
             print("\n")
     except ValueError:
-        print("Ввели некорректные данные, попробуйте еще раз.")
+        print("Ввели некорректные данные, попробуйте еще раз")
+    except TypeError:
+        print("Ошибка введенных данных.")
+    except Exception as e:
+        print("Непредвиденная ошибка!")
 
 
 def user_watch_all_book() -> None:
@@ -82,7 +92,11 @@ def user_watch_all_book() -> None:
             print("\n")
 
     except ValueError:
-        pass
+        print("Ввели некорректные данные, попробуйте еще раз")
+    except TypeError:
+        print("Ошибка введенных данных.")
+    except Exception as e:
+        print("Непредвиденная ошибка!")
 
 def descriptor_user_data_status_book(status) -> bool:
     if status == "1":
@@ -116,10 +130,13 @@ def user_change_status_book() -> None:
         )
         b_new.show_book()
 
+
     except ValueError:
-        pass
-    except Exception:
-        print("Что-то пошло не так! Попробуйте еще раз, возможно такого id нет.")
+        print("Ввели некорректные данные, попробуйте еще раз")
+    except TypeError:
+        print("Ошибка введенных данных.")
+    except Exception as e:
+        print("Непредвиденная ошибка!")
 
 # # add test data
 # save_test_data()
