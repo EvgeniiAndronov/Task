@@ -3,7 +3,6 @@ import random
 import string
 from book import *
 
-
 def add_book(book) -> None:
     try:
         with open('data.json', 'r+') as file:
@@ -18,6 +17,11 @@ def add_book(book) -> None:
         with open('data.json', 'w') as file:
             book["id"] = generate_random_id()
             json.dump([book], file)
+    except FileExistsError:
+        print("Файл уже обрабатывается")
+    except Exception as e:
+        # print(e)
+        print("Непредвиденная ошибка! Попробуйте снова.")
 
 def generate_random_id() -> str:
     letters_and_digits = string.ascii_letters + string.digits
@@ -25,41 +29,50 @@ def generate_random_id() -> str:
     return random_id
 
 def delete_book(book_id) -> None:
-    with open('data.json', 'r+') as file:
-        data = json.load(file)
-        update_data = [obj for obj in data if obj["id"] != book_id]
-        # for obj in data:
-        #     print(f"-{book_id}-\n-{obj['id']}-")
-        #     if obj["id"] != book_id:
-        #         print(f"{obj['id']}-")
-        #         update_data.append(obj)
+    try:
+        with open('data.json', 'r+') as file:
+            data = json.load(file)
+            update_data = [obj for obj in data if obj["id"] != book_id]
+            # for obj in data:
+            #     print(f"-{book_id}-\n-{obj['id']}-")
+            #     if obj["id"] != book_id:
+            #         print(f"{obj['id']}-")
+            #         update_data.append(obj)
 
-        file.seek(0)
-        json.dump(update_data, file, sort_keys=True)
-        file.truncate()
-
+            file.seek(0)
+            json.dump(update_data, file, sort_keys=True)
+            file.truncate()
+    except FileNotFoundError:
+        print("Файл не найден! Создайте первую запись.")
+    except Exception as e:
+        print("Непредвиденная ошибка обработки")
 
 def find_books(parametr, typ) -> [dict]:
     data_to_ret = []
-
-    with open('data.json', 'r') as file:
-        if typ == "year":
-            try:
-                parametr = int(parametr)
-            except ValueError:
-                print("Введены некорректные данные")
-                return [{"id": "empty",
-                        "title": "empty",
-                        "author": "empty",
-                        "year": 2000,
-                        "status": False
-                        }]
-        data = json.load(file)
-        for obj in data:
-            if obj[f"{typ}"] == parametr:
-                data_to_ret.append(obj)
-    return data_to_ret
-
+    try:
+        with open('data.json', 'r') as file:
+            if typ == "year":
+                try:
+                    parametr = int(parametr)
+                except ValueError:
+                    print("Введены некорректные данные")
+                    return [{"id": "empty",
+                            "title": "empty",
+                            "author": "empty",
+                            "year": 2000,
+                            "status": False
+                            }]
+            data = json.load(file)
+            for obj in data:
+                if obj[f"{typ}"] == parametr:
+                    data_to_ret.append(obj)
+        return data_to_ret
+    except FileNotFoundError:
+        print("Файл не найден! Создайте первую запись.")
+    except ValueError:
+        print("Ошибка введенных данных.")
+    except Exception as e:
+        print("Непредвиденная ошибка обработки")
 
 def all_books() -> list:
     with open('data.json', 'r') as file:
@@ -67,12 +80,19 @@ def all_books() -> list:
         return data
 
 def change_book_status(book_id, new_status) -> None:
-    with open('data.json', 'r+') as file:
-        data = json.load(file)
-        for obj in data:
-            if obj["id"] == book_id:
-               obj["status"] = new_status
+    try:
+        with open('data.json', 'r+') as file:
+            data = json.load(file)
+            for obj in data:
+                if obj["id"] == book_id:
+                   obj["status"] = new_status
 
-        file.seek(0)
-        json.dump(data, file)
+            file.seek(0)
+            json.dump(data, file)
+    except FileNotFoundError:
+        print("Файл не найден! Создайте первую запись.")
+    except ValueError:
+        print("Ошибка введенных данных.")
+    except Exception as e:
+        print("Непредвиденная ошибка обработки")
 

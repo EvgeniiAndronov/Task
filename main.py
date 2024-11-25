@@ -122,7 +122,7 @@ def user_change_status_book() -> None:
         print("Что-то пошло не так! Попробуйте еще раз, возможно такого id нет.")
 
 # # add test data
-save_test_data()
+# save_test_data()
 #
 # print("all books------------------")
 # user_watch_all_book()
