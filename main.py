@@ -186,5 +186,4 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
-    save_test_data()
+    main()
