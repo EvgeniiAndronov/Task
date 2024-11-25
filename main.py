@@ -1,6 +1,5 @@
+from add_test_data import save_test_data
 from setUpToUser import *
-
-
 
 def main():
     flag = True
@@ -24,3 +23,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # save_test_data()

@@ -116,7 +116,18 @@ def descriptor_user_data_status_book(status) -> bool:
 def user_change_status_book() -> None:
     try:
         id = str(input("Введите id книги, у которой хотите изменить статус: "))
-        book: [dict] = find_books(id, "id")[0]
+        book_d: [dict] = find_books(id, "id")
+        print("------book-----\n")
+        print(book_d)
+        print("------book-----\n")
+
+        if len(book_d) == 0:
+            exit(1)
+        print("------book len-----\n")
+        print(len(book_d))
+        print("------book len-----\n")
+        book = book_d[0]
+
         b: Book = Book(
             id=book.get("id"),
             title=book.get("title"),
@@ -124,9 +135,11 @@ def user_change_status_book() -> None:
             year=book.get("year"),
             status=book.get("status")
         )
+
+        print()
+
         b.show_book()
-        status = str(input(
-            "Введите новый статус:\nЕсли хотите изменить статус на 'Выдана' - введите 1,\nесли хотите изменить статус на 'В наличии' - введите 2\n"))
+        status = str(input("Введите новый статус:\nЕсли хотите изменить статус на 'Выдана' - введите 1,\nесли хотите изменить статус на 'В наличии' - введите 2\n"))
 
         change_book_status(book.get("id"), descriptor_user_data_status_book(status))
         book_new: [dict] = find_books(id, "id")[0]

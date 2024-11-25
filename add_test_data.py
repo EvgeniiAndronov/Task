@@ -4,20 +4,20 @@ def save_test_data():
     data = [
         {
         "id": "1234567890",
-        "title": "title",
-        "author": "author",
+        "title": "C/C++",
+        "author": "B. Straustrup",
         "year": 2000,
         "status": True
     }, {
         "id": "2345678901",
-        "title": "test",
-        "author": "test",
+        "title": "Delphy 7",
+        "author": "E. Trompton",
         "year": 1999,
         "status": False
     }, {
         "id": "3456789012",
         "title": "Harry Potter",
-        "author": "Rouling",
+        "author": "J. Rouling",
         "year": 1998,
         "status": True
     }
