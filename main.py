@@ -149,6 +149,7 @@ def user_change_status_book() -> None:
 
 
 list_command = """
+-------------COMMANDS-------------
     1. Добавление книги.
     2. Удаление книги.
     3. Поиск книги.
