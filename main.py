@@ -91,7 +91,7 @@ def user_watch_all_book() -> None:
                 year=book.get("year"),
                 status=book.get("status")
             )
-            print(f"-----{b.id}------")
+            print(f"-----Id = {b.id}------")
             b.show_book()
             print("\n")
 
